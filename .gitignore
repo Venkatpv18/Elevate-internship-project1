@@ -1,0 +1,9 @@
+# Ignore large audio dataset & temp files
+GTZAN/
+*.wav
+*.mp3
+*.ogg
+*.zip
+temp_*
+__pycache__/
+.ipynb_checkpoints/
