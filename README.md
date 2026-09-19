@@ -1,5 +1,9 @@
 # 🎵 AI Music Genre Intelligence & Classification Platform
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/)
+
+> 🚀 **Live Demo Web App**: [https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/](https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/)
+
 An end-to-end Machine Learning and Audio Signal Processing application that automatically classifies music tracks into **10 distinct genres** with **90.74% test accuracy** on the GTZAN benchmark dataset.
 
 ---
@@ -51,14 +55,6 @@ An end-to-end Machine Learning and Audio Signal Processing application that auto
 
 ---
 
-## 🚀 Deployment Instructions
+## 🚀 Live Cloud Deployment
 
-### Deploy to Streamlit Community Cloud (Free)
-1. Push this folder to a public GitHub repository.
-2. Sign in to [share.streamlit.io](https://share.streamlit.io/).
-3. Click **New app**, select your repository, set Main file path to `app.py`, and click **Deploy**!
-
-### Deploy to Hugging Face Spaces (Free)
-1. Create a new Space on [Hugging Face](https://huggingface.co/spaces) with **Streamlit** SDK.
-2. Upload `app.py`, `requirements.txt`, `music_genre_model.pkl`, `scaler.pkl`, and `label_encoder.pkl`.
-3. Hugging Face will automatically build and launch your app!
+- **Streamlit Community Cloud (Live)**: [https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/](https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/)

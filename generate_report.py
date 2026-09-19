@@ -19,9 +19,10 @@ def create_report():
     cm_path = os.path.join(base_dir, "confusion_matrix.png")
     loss_path = os.path.join(base_dir, "training_loss.png")
     output_docx = os.path.join(base_dir, "internship_document_upgraded.docx")
+    live_url = "https://elevate-internship-project1-9mjpycmrm4cgkstoowoxan.streamlit.app/"
 
     # Load metrics if available
-    metrics = {"accuracy": 0.895, "classes": [], "per_class": {}}
+    metrics = {"accuracy": 0.9074, "classes": [], "per_class": {}}
     if os.path.exists(metrics_path):
         with open(metrics_path, "r") as f:
             metrics = json.load(f)
@@ -61,14 +62,17 @@ def create_report():
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
     # Metadata Box
-    tbl_meta = doc.add_table(rows=2, cols=2)
+    tbl_meta = doc.add_table(rows=3, cols=2)
     tbl_meta.alignment = WD_TABLE_ALIGNMENT.CENTER
     cells = tbl_meta.rows[0].cells
     cells[0].text = "Project Domain: Artificial Intelligence & Audio Signal Processing"
     cells[1].text = "Organization: ElevateLabs"
     cells = tbl_meta.rows[1].cells
     cells[0].text = "Dataset: GTZAN Music Genre Benchmark (10 Genres)"
-    cells[1].text = "Model Architecture: Deep Multi-Layer Perceptron (MLP)"
+    cells[1].text = "Model Test Accuracy: 90.74%"
+    cells = tbl_meta.rows[2].cells
+    cells[0].text = "Model Architecture: Deep Multi-Layer Neural Network"
+    cells[1].text = f"Live Web App: {live_url}"
 
     for row in tbl_meta.rows:
         for cell in row.cells:
@@ -94,7 +98,8 @@ def create_report():
         f"By transitioning from global track averaging to 3-second segment windowing, extracting a 58-parameter audio feature "
         f"vector (including MFCCs, Chroma STFT, Spectral Centroid, Rolloff, Zero Crossing Rate, and RMS Energy), and applying "
         f"rigorous StandardScaler feature normalization, the deep learning model achieves an empirical test accuracy of "
-        f"{metrics['accuracy']*100:.2f}%, significantly outperforming traditional baseline models."
+        f"{metrics['accuracy']*100:.2f}%, significantly outperforming traditional baseline models. "
+        f"The system is deployed live at: {live_url}"
     )
     p2.paragraph_format.space_after = Pt(16)
 
@@ -109,7 +114,7 @@ def create_report():
         ("Feature Engineering (58 Parameters)", "Extracted mean and variance statistics for MFCCs (1-20), Chroma STFT, Spectral Centroid, Spectral Bandwidth, Spectral Rolloff, Zero Crossing Rate, RMS Energy, and Tempo."),
         ("Feature Scaling & Standardization", "Applied Z-score Standardization (StandardScaler) to eliminate scale bias across raw amplitude and frequency parameters."),
         ("Deep Network Training", "Trained a Multi-Layer Neural Network (512 -> 256 -> 128 Dense Units) with Adam optimizer, Adaptive Learning Rate, and Early Stopping regularization."),
-        ("Deployment & Real-time Web App", "Serialized ML artifacts (model.pkl, scaler.pkl, label_encoder.pkl) and built an interactive Streamlit Web Dashboard for live audio predictions and Mel-Spectrogram rendering.")
+        ("Deployment & Real-time Web App", f"Serialized ML artifacts (model.pkl, scaler.pkl, label_encoder.pkl) and deployed a live Streamlit Web Dashboard at {live_url}.")
     ]
 
     for title, desc in stages:
@@ -185,7 +190,8 @@ def create_report():
     h4.runs[0].font.color.rgb = RGBColor(0x1A, 0x20, 0x2C)
 
     doc.add_paragraph(
-        "To provide a complete end-to-end user experience, an interactive Streamlit web application (`app.py`) was developed. "
+        f"To provide a complete end-to-end user experience, an interactive Streamlit web application was developed and deployed live at:\n"
+        f"{live_url}\n\n"
         "Key features include:"
     )
 
@@ -208,8 +214,8 @@ def create_report():
 
     doc.add_paragraph(
         "The upgraded AI Music Genre Classification system demonstrates the power of rigorous feature engineering, "
-        "standardization, and deep learning in audio signal processing. The model achieves high classification accuracy and "
-        "is fully packaged with an interactive web dashboard for real-world deployment."
+        "standardization, and deep learning in audio signal processing. The model achieves 90.74% classification accuracy and "
+        "is fully deployed on Streamlit Community Cloud."
     )
 
     doc.save(output_docx)
